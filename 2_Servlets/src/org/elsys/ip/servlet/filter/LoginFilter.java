@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -36,16 +37,40 @@ public class LoginFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+
+		// The hardcode is here ;)
+		String usernameHardcoded = "hristian";
+		String passwordHardcoded = "milko";
+		HttpServletRequest httpRequest = ((HttpServletRequest)request);
+		HttpServletResponse httpResponse = ((HttpServletResponse)response);
+		boolean authorized = false;
+
 		PrintWriter out = response.getWriter();
 
 		String username = request.getParameter("name");
 		String password = request.getParameter("password");
 
-		boolean authorized = true;
-		
+		if (usernameHardcoded.equals(username) && passwordHardcoded.equals(password)) {
+			authorized = true;
+		}
+
+		Cookie[] cookies = httpRequest.getCookies();
+		for (Cookie c : cookies) {
+			if (c.getName().equals("autorization")) {
+				if (c.getValue().equals("true")) {
+					authorized = true;
+				}
+			}
+		}
+
 		// check username and password (can be hardcoded, can use the userService)
 		// add if the person is logged in to a cookie (Google it), so that we do not check at every page
 		if (authorized) {
+
+			Cookie authorization = new Cookie("autorization", "true");
+
+			httpResponse.addCookie(authorization);
+
 			chain.doFilter(request, response);
 		} else {
 			request.setAttribute("error", "Wrong username or password!");
