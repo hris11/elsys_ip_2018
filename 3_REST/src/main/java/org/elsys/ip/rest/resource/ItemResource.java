@@ -6,10 +6,8 @@ import org.elsys.ip.rest.service.ItemService;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.*;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -21,18 +19,13 @@ public class ItemResource {
 
     @GET
     @Path("items")
-    public Response getItems(@Context UriInfo uriInfo) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Item> getItems(@Context UriInfo uriInfo) {
         MultivaluedMap<String, String> queries = uriInfo.getQueryParameters();
-
+        
         List<Item> allItems = itemService.getFiltered(queries);
 
-
-        for (Item i : allItems) {
-            System.out.println(i.getId() + " item: " + i.getName());
-        }
-
-
-        return Response.ok().build();
+        return allItems;
     }
 
 

@@ -71,7 +71,7 @@ public class ItemService {
         return itemRepository.getAllItems();
     }
 
-    public List<Item> getFiltered(MultivaluedMap<String, String> queries) {
+    public List<Item> getFilteredByQueries(MultivaluedMap<String, String> queries) {
         Iterator<String> it = queries.keySet().iterator();
         List<Item> allItems = itemRepository.getAllItems();
 
@@ -80,10 +80,47 @@ public class ItemService {
             String theKey = (String)it.next();
             String value = queries.getFirst(theKey);
 
-            System.out.println("key: " + theKey + "value: " + value);
             allItems = filterQueries(allItems, theKey, value);
         }
 
         return allItems;
+    }
+
+    public List<Item> getFilteredById(MultivaluedMap<String, String> queries) {
+        Iterator<String> it = queries.keySet().iterator();
+        List<Item> result = new ArrayList<>();
+
+        for (String value : queries.get("id")) {
+            result.addAll(getItemById(value));
+        }
+
+        return result;
+    }
+
+    public List<Item> getFiltered(MultivaluedMap<String, String> queries) {
+        if (!queries.isEmpty()) {
+            if (queries.containsKey("id")) {
+                return getFilteredById(queries);
+            } else {
+                return getFilteredByQueries(queries);
+            }
+        }
+
+        return itemRepository.getAllItems();
+    }
+
+
+    public List<Item> getItemById(String value) {
+        List<Item> allItems = itemRepository.getAllItems();
+        List<Item> result = new ArrayList<>();
+
+//        allItems = allItems.stream().filter(i -> i.getId().equals(Integer.valueOf(value))).collect(Collectors.toList());
+
+        for (Item i : allItems) {
+            if (i.getId() == Integer.valueOf(value)) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 }
