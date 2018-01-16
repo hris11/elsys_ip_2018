@@ -38,7 +38,6 @@ function searchItem() {
 }
 
 function deleteById(id) {
-    console.log("neshtooooo");
     let url = `/api/shop/items/${id}`;
     $.ajax({
         method: 'DELETE',

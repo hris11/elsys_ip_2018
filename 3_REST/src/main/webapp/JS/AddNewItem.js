@@ -4,7 +4,6 @@ function createNewItem() {
     $("#insert-item input").each(function () {
          body[$(this).attr("name")] = $(this).val();
     });
-    console.log(JSON.stringify(body));
 
     $.ajax({
         method: 'POST',

@@ -97,20 +97,6 @@ public class CSVService {
                         nextRecord[4]
                         )
                 );
-                System.out.println("id : " + nextRecord[0]);
-                System.out.println("name : " + nextRecord[1]);
-                System.out.println("desc : " + nextRecord[2]);
-                System.out.println("price : " + nextRecord[3]);
-                System.out.println("city : " + nextRecord[4]);
-                System.out.println("tags : " + nextRecord[5]);
-                System.out.println("color : " + nextRecord[6]);
-                System.out.println("price : " + nextRecord[7]);
-                System.out.println("score : " + nextRecord[8]);
-                System.out.println("brand : " + nextRecord[9]);
-                System.out.println("discount : " + nextRecord[10]);
-                System.out.println("availability : " + nextRecord[11]);
-                System.out.println("publishDate : " + nextRecord[12]);
-                System.out.println("==========================");
             }
         }
     }
