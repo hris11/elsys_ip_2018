@@ -2,7 +2,7 @@
          xmlns="http://java.sun.com/xml/ns/j2ee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
-	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
   <display-name>Restful Web Application</display-name>
   <servlet>
     <servlet-name>jersey-serlvet</servlet-name>
@@ -10,7 +10,7 @@
       org.glassfish.jersey.servlet.ServletContainer
     </servlet-class>
     <init-param>
-      <param-name>java.ws.rs.Application</param-name>
+      <param-name>javax.ws.rs.Application</param-name>
       <param-value>org.elsys.ip.rest.config.ApplicationConfig</param-value>
     </init-param>
     <init-param>
@@ -23,14 +23,5 @@
   <servlet-mapping>
     <servlet-name>jersey-serlvet</servlet-name>
     <url-pattern>/api/*</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>TestServlet</servlet-name>
-    <servlet-class>org.elsys.ip.rest.servlet.TestServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>TestServlet</servlet-name>
-    <url-pattern>/servlet/*</url-pattern>
   </servlet-mapping>
 </web-app>
