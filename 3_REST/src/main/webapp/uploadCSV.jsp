@@ -10,7 +10,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+<body style="background: #282828;">
 <jsp:include page="navigation.jsp" />
 <form action="/api/csv/upload" method="post" enctype="multipart/form-data">
     <input type="file" accept="text/csv" name="file">

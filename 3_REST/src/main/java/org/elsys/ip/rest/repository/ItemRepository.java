@@ -43,16 +43,32 @@ public class ItemRepository {
     }
 
 
-    public void delete() {
+    public void delete(Integer id) {
+        List<Item> toRemove = new ArrayList<>();
+        for (Item item : itemsList) {
+            if (item.getId() == id) {
+                toRemove.add(item);
+            }
+        }
 
+        itemsList.removeAll(toRemove);
     }
 
     public void insert(Item item) {
         itemsList.add(item);
     }
 
-    public void update() {
+    public void update(Integer id, Item item) {
+        delete(id);
+        insert(item);
+    }
 
+    public Integer getLastId() {
+        if (itemsList.size() != 0) {
+            return itemsList.get(itemsList.size() - 1).getId();
+        } else {
+            return 0;
+        }
     }
 }
 

@@ -10,7 +10,7 @@
 <head>
     <title>$Title$</title>
 </head>
-<body>
+<body style="background: #282828;">
     <jsp:include page="navigation.jsp" />
 </body>
 

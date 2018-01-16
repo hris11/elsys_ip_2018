@@ -132,4 +132,20 @@ public class ItemService {
         }
         itemRepository.addMultiItems(items);
     }
+
+    public void insert(Item item) {
+        item.setPublishDate(new Date());
+        Integer lastId = itemRepository.getLastId();
+        item.setId(lastId + 1);
+        itemRepository.insert(item);
+    }
+
+    public void deleteById(Integer id) {
+        itemRepository.delete(id);
+    }
+
+    public void updateItem(Integer id, Item item) {
+        item.setId(id);
+        itemRepository.update(id, item);
+    }
 }

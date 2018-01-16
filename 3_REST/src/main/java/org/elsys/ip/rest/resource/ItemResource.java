@@ -28,6 +28,15 @@ public class ItemResource {
     }
 
     @POST
+    @Path("items")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response insertItem(Item item) {
+        itemService.insert(item);
+
+        return Response.ok().build();
+    }
+
+    @POST
     @Path("items/multiple")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response multipleItemPost(List<Item> items) {
@@ -37,5 +46,17 @@ public class ItemResource {
         return Response.ok().build();
     }
 
+    @DELETE
+    @Path("items/{id}")
+    public void deleteById(@PathParam("id") Integer id) {
+        itemService.deleteById(id);
+    }
+
+    @PUT
+    @Path("items/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateById(@PathParam("id") Integer id, Item item) {
+        itemService.updateItem(id, item);
+    }
 
 }

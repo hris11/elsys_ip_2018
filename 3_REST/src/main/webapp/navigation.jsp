@@ -11,13 +11,13 @@
     <link href="./styles/navigation.css" rel="stylesheet">
     <title>Navigation</title>
 </head>
-<body>
+<body style="background: #282828;">
 <ul>
     <li>
-        <a href="./login.jsp">LOGIN</a>
+        <a href="./newItem.jsp">ADD NEW ITEM</a>
     </li>
     <li>
-        <a href="./register.jsp">REGISTER</a>
+        <a href="./searchItems.jsp">SEARCH ITEMS</a>
     </li>
     <li>
         <a href="./uploadCSV.jsp">UPLOAD CSV</a>
