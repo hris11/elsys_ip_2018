@@ -1,3 +1,4 @@
+/*
 package org.elsys.ip.rest.repository;
 
 import org.elsys.ip.rest.model.Item;
@@ -79,3 +80,4 @@ public class UserRepository {
     }
 
 }
+*/

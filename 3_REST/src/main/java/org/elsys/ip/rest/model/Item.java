@@ -1,10 +1,14 @@
 package org.elsys.ip.rest.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.util.Date;
 import java.util.List;
 
+@JsonSerialize
 public class Item {
     /*Name
             Description
@@ -18,7 +22,6 @@ public class Item {
     Availability (колко има от този продукт в наличност)
     City (Градът на потребитял, който е лист-нал продукта)*/
 
-    @JsonIgnore
     private Integer id;
     private String name;
     private Integer price;
@@ -26,6 +29,7 @@ public class Item {
     private String color;
     private Integer discount;
     private String brand;
+    @JsonIgnore
     private Date publishDate;
     private Integer score;
     private String tags;

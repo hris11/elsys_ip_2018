@@ -3,10 +3,10 @@ package org.elsys.ip.rest.service;
 import org.elsys.ip.rest.model.Item;
 import org.elsys.ip.rest.model.User;
 import org.elsys.ip.rest.repository.ItemRepository;
-import org.elsys.ip.rest.repository.UserRepository;
 
 import javax.ws.rs.core.MultivaluedMap;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 public class ItemService {
 
     private ItemRepository itemRepository = new ItemRepository();
-
-    private UserRepository userRepository = new UserRepository();
 
     public List<Item> filterQueries(List<Item> input, String queryKey, String queryValue) {
         switch (queryKey) {
@@ -128,7 +126,10 @@ public class ItemService {
         return result;
     }
 
-    public void addMultiItems(Integer userId, List<Item> items) {
-        userRepository.setUserItems(userId, items);
+    public void addMultiItems(List<Item> items) {
+        for (Item item : items) {
+            item.setPublishDate(new Date());
+        }
+        itemRepository.addMultiItems(items);
     }
 }

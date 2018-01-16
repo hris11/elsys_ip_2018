@@ -1,5 +1,6 @@
 package org.elsys.ip.rest.resource;
 
+import org.elsys.ip.rest.TestInp.tesstt;
 import org.elsys.ip.rest.model.Item;
 import org.elsys.ip.rest.repository.ItemRepository;
 import org.elsys.ip.rest.service.ItemService;
@@ -27,13 +28,11 @@ public class ItemResource {
     }
 
     @POST
-    @Path("{id}/items/multiple")
+    @Path("items/multiple")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response multipleItemPost(@PathParam("id") Integer userId, List<Item> items) {
+    public Response multipleItemPost(List<Item> items) {
 
-        
-
-        itemService.addMultiItems(userId, items);
+        itemService.addMultiItems(items);
 
         return Response.ok().build();
     }
