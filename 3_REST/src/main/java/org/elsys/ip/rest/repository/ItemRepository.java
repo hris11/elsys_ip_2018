@@ -64,11 +64,17 @@ public class ItemRepository {
     }
 
     public Integer getLastId() {
+        Integer result = 0;
+
         if (itemsList.size() != 0) {
-            return itemsList.get(itemsList.size() - 1).getId();
-        } else {
-            return 0;
+            for (Item item : itemsList) {
+                if (item.getId() > result) {
+                    result = item.getId();
+                }
+            }
         }
+
+        return result;
     }
 }
 
