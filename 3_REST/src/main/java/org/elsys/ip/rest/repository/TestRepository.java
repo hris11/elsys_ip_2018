@@ -1,41 +1,56 @@
 package org.elsys.ip.rest.repository;
 
+import org.elsys.ip.rest.config.HibernateUtil;
 import org.elsys.ip.rest.model.Test;
+import org.hibernate.Session;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class TestRepository {
-  private static List<Test> testList = new ArrayList<>(
-    Arrays.asList(
-      new Test(1, "name1"),
-      new Test(2, "name2"),
-      new Test(3, "name3"),
-      new Test(4, "name4")
-    ));
+
 
   public List<Test> getTestList() {
-    return testList;
+      List<Test> tests;
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      session.beginTransaction();
+
+      tests = session.createQuery("from Test", Test.class)
+              .getResultList();
+
+      session.getTransaction().commit();
+      return tests;
   }
 
-  public Optional<Test> getTestById(Integer id) {
-    return testList.stream().filter(test -> test.getId() == id).findFirst();
+  public Test getTestById(Integer id) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      session.beginTransaction();
+      Test test = session.load(Test.class, id);
+      session.getTransaction().commit();
+      return test;
   }
 
   public Test saveTest(Test test) {
-    testList.add(test);
+    Session session = HibernateUtil.getSessionFactory().openSession();
+    session.beginTransaction();
+    session.save(test);
+    session.getTransaction().commit();
     return test;
   }
 
-  public Test updateTest(Integer id, Test test) {
-    int realId = id - 1;
-    testList.set(realId, test);
-    return test;
+  public Test updateTest(Test test) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      session.beginTransaction();
+      session.merge(test);
+      session.getTransaction().commit();
+      return test;
   }
 
-  public void deleteTest(Integer id) {
-    testList.removeIf(it -> it.getId() == id);
+  public Test deleteTest(Integer id) {
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      session.beginTransaction();
+      Test test = session.load(Test.class, id);
+      session.remove(test);
+      session.getTransaction().commit();
+      return test;
   }
 }

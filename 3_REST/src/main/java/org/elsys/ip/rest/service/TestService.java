@@ -14,15 +14,15 @@ public class TestService {
   }
 
   public Test getTestById(Integer id) {
-    return testRepository.getTestById(id).orElse(null);
+    return testRepository.getTestById(id);
   }
 
   public Test saveTest(Test test) {
     return testRepository.saveTest(test);
   }
 
-  public Test updateTest(Integer id, Test test) {
-    return testRepository.updateTest(id, test);
+  public Test updateTest(Test test) {
+    return testRepository.updateTest(test);
   }
 
   public void deleteTest(Integer id) {

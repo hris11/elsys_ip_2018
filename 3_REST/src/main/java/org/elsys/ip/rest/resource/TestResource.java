@@ -87,7 +87,8 @@ public class TestResource {
   @Consumes("application/json")
   @Produces("application/json")
   public Test updateTest(@PathParam("id") Integer id, Test test) {
-    return testService.updateTest(id, test);
+    test.setId(id);
+    return testService.updateTest(test);
   }
 
   /**

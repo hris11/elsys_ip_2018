@@ -1,7 +1,20 @@
 package org.elsys.ip.rest.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Entity
+@Table
 public class Test {
-  private int id;
+  @JsonIgnore
+  @Id
+  @GeneratedValue(generator="increment")
+  @GenericGenerator(name="increment", strategy = "increment")
+  private Integer id;
+
+  @Column(nullable = false)
   private String name;
 
   public Test(int id, String name) {
